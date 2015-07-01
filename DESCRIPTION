@@ -1,0 +1,17 @@
+Package: FishTacoPlot
+Title: Functions to Produce the FishTaco Plots
+Version: 0.1
+Date: 2014-12-16
+Authors@R: c(person("Ohad", "Manor", role = c("aut", "cre"), email = "ohadm@uw.edu"))
+Author: Ohad Manor
+Maintainer: Ohad Manor <ohadm@uw.edu>
+Description: Functions to produce the FishTaco plots
+Depends: R (>= 3.1.2)
+Imports:
+    ggplot2 (>= 1.0.0),
+    reshape2 (>= 1.4.1),
+    grid (>= 3.1.2),
+    scales (>= 0.2.4),
+    matrixStats (>= 0.12.2)
+License: BSD
+LazyData: true
