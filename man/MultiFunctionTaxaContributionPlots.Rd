@@ -2,7 +2,7 @@
 % Please edit documentation in R/MultiFunctionTaxaContributionPlots.R
 \name{MultiFunctionTaxaContributionPlots}
 \alias{MultiFunctionTaxaContributionPlots}
-\title{A function to plot different versions of the FiShTaCo plot for multiple functions}
+\title{A function to plot different versions of the FishTaco plot for multiple functions}
 \usage{
 MultiFunctionTaxaContributionPlots(input_dir = NULL, input_prefix = NULL,
   input_suffix = ".tab", input_score = "wilcoxon",
@@ -19,7 +19,7 @@ MultiFunctionTaxaContributionPlots(input_dir = NULL, input_prefix = NULL,
   input_function_stats = NULL, input_function_filter_list = NULL,
   input_function_filter_file = NULL, plot_type = "bars",
   sort_by = "predicted_da", min_contribution = 0,
-  min_cont_as_separate = 0.2, min_function_counts = 0,
+  min_cont_as_separate = 0.025, min_function_counts = 0,
   min_shift_explained = 0, max_function_to_show = NULL,
   show_only_diff_abun_taxa = FALSE, show_only_pos = FALSE,
   show_only_neg = FALSE, show_only_taxa_with_function = FALSE,
@@ -30,7 +30,7 @@ MultiFunctionTaxaContributionPlots(input_dir = NULL, input_prefix = NULL,
   add_names_in_bars = FALSE, add_taxa_da = FALSE,
   add_case_control_line = FALSE, add_predicted_da_markers = TRUE,
   add_original_da_markers = FALSE, add_phyla_names_to_species_label = FALSE,
-  color_small_cont_by_phyla = TRUE, input_bar_width = NULL,
+  color_small_cont_by_phyla = FALSE, input_bar_width = NULL,
   verbose = FALSE, flip_coord = TRUE, split_function_names_2_lines = TRUE,
   separate_enriched_depleted_taxa = TRUE, use_facets_for_separation = FALSE,
   flip_case_control = FALSE)
@@ -138,6 +138,6 @@ MultiFunctionTaxaContributionPlots(input_dir = NULL, input_prefix = NULL,
 a handle to the resulting plot.
 }
 \description{
-A function to plot different versions of the FiShTaCo plot for multiple functions
+A function to plot different versions of the FishTaco plot for multiple functions
 }
 
