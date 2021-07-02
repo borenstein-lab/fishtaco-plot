@@ -253,7 +253,7 @@ MultiFunctionTaxaContributionPlots <- function(input_dir=NULL,
     print(paste("reading file:",input_file_name))
   }
 
-  df = read.table(input_file_name, sep = "\t", header=TRUE, stringsAsFactors=FALSE, check.names=FALSE)
+  df = read.table(input_file_name, sep = "\t", header=TRUE, stringsAsFactors=FALSE, check.names=FALSE, quote="")
 
   if (flip_case_control) {
     df[, -1] = -1 * df[, -1, drop=FALSE]
@@ -285,7 +285,7 @@ MultiFunctionTaxaContributionPlots <- function(input_dir=NULL,
   # read function filter file/list
   #-------------------------------
   if (!is.null(input_function_filter_file)) {
-    function_filter_list_from_file = read.table(input_function_filter_file, sep = "\t", header=FALSE, stringsAsFactors=FALSE)
+    function_filter_list_from_file = read.table(input_function_filter_file, sep = "\t", header=FALSE, stringsAsFactors=FALSE, quote="")
     functions = functions[functions %in% function_filter_list_from_file$V1]
     if (length(functions) == 0){
       print(paste("Error: the filter file:",input_function_filter_file,
@@ -311,7 +311,7 @@ MultiFunctionTaxaContributionPlots <- function(input_dir=NULL,
   # read taxonomy file
   #-------------------------------
   if (!is.null(input_taxa_taxonomy)) {
-    taxonomy = read.table(input_taxa_taxonomy, sep = "\t", header=FALSE, stringsAsFactors=FALSE)
+    taxonomy = read.table(input_taxa_taxonomy, sep = "\t", header=FALSE, stringsAsFactors=FALSE, quote="")
     rownames(taxonomy) = taxonomy[,1]
     taxonomy[,1] = NULL
     names(taxonomy) = c('kingdom','phylum','class','order','family','genus','species')
@@ -322,7 +322,7 @@ MultiFunctionTaxaContributionPlots <- function(input_dir=NULL,
   # filter out low-counts functions
   #-------------------------------
   if (!is.null(input_function_counts)) {
-    function_counts = read.table(input_function_counts, sep = "\t", header=TRUE, stringsAsFactors=FALSE)
+    function_counts = read.table(input_function_counts, sep = "\t", header=TRUE, stringsAsFactors=FALSE, quote="")
     function_counts = function_counts[function_counts$Stats %in% functions,]
     function_counts = function_counts[function_counts$Median >= min_function_counts,]
     functions = functions[functions %in% function_counts$Stats]
@@ -334,7 +334,7 @@ MultiFunctionTaxaContributionPlots <- function(input_dir=NULL,
   # read function stats file
   #-------------------------------
   if (!is.null(input_function_stats)) {
-    function_stats = read.table(input_function_stats, sep = "\t", header=TRUE, stringsAsFactors=FALSE)
+    function_stats = read.table(input_function_stats, sep = "\t", header=TRUE, stringsAsFactors=FALSE, quote="")
     function_stats = function_stats[function_stats$Stats %in% functions,]
     row.names(function_stats) = function_stats[,1]
     function_stats[,1] = NULL
@@ -348,7 +348,7 @@ MultiFunctionTaxaContributionPlots <- function(input_dir=NULL,
   # function (for each function)
   #-------------------------------
   if (!is.null(input_taxa_vs_function)) {
-    taxa_to_function = read.table(input_taxa_vs_function, sep = "\t", header=TRUE, stringsAsFactors=FALSE)
+    taxa_to_function = read.table(input_taxa_vs_function, sep = "\t", header=TRUE, stringsAsFactors=FALSE, quote="")
     row.names(taxa_to_function) = taxa_to_function[,1]
     taxa_to_function[,1] = NULL
     taxa_to_function = taxa_to_function[, functions]
@@ -369,7 +369,7 @@ MultiFunctionTaxaContributionPlots <- function(input_dir=NULL,
     predicted_abundance_agreement = read.table(paste(input_dir,"/",input_prefix,"_STAT_",
                                                      input_predicted_abundance_agreement,"_SCORE_",
                                                      input_score,"_ASSESSMENT_",input_permutation,input_suffix, sep=""),
-                                               sep = "\t", header=TRUE, stringsAsFactors=FALSE)
+                                               sep = "\t", header=TRUE, stringsAsFactors=FALSE, quote="")
 
     predicted_abundance_agreement = predicted_abundance_agreement[predicted_abundance_agreement$KO %in% functions,]
   }
@@ -380,7 +380,7 @@ MultiFunctionTaxaContributionPlots <- function(input_dir=NULL,
   if (!is.null(input_predicted_da)) { #
     predicted_da = read.table(paste(input_dir,"/",input_prefix,"_STAT_",input_predicted_da,"_SCORE_",
                                     input_score,"_ASSESSMENT_",input_permutation,input_suffix, sep=""),
-                              sep = "\t", header=TRUE, stringsAsFactors=FALSE)
+                              sep = "\t", header=TRUE, stringsAsFactors=FALSE, quote="")
 
     predicted_da = predicted_da[predicted_da$KO %in% functions,]
     if (flip_case_control) {
@@ -395,7 +395,7 @@ MultiFunctionTaxaContributionPlots <- function(input_dir=NULL,
   if (!is.null(input_original)) {
     function_da = read.table(paste(input_dir,"/",input_prefix,"_STAT_",input_original,"_SCORE_",
                                    input_score,"_ASSESSMENT_",input_permutation,input_suffix, sep=""),
-                             sep = "\t", header=TRUE, stringsAsFactors=FALSE)
+                             sep = "\t", header=TRUE, stringsAsFactors=FALSE, quote="")
 
     function_da = function_da[function_da$KO %in% functions,]
 
@@ -502,7 +502,7 @@ MultiFunctionTaxaContributionPlots <- function(input_dir=NULL,
   if (!is.null(input_taxa_da)) { # we have DA information for taxa
     taxa_da = read.table(paste(input_dir,"/",input_prefix,"_STAT_",input_taxa_da,"_SCORE_",
                                input_score,"_ASSESSMENT_",input_permutation,input_suffix, sep=""),
-                         sep = "\t", header=TRUE, stringsAsFactors=FALSE)
+                         sep = "\t", header=TRUE, stringsAsFactors=FALSE, quote="")
 
     taxa_da_original_names = taxa_da
 
@@ -555,8 +555,8 @@ MultiFunctionTaxaContributionPlots <- function(input_dir=NULL,
     if (!is.null(input_inference_copy_number)) { #
       inferred_copy_number = read.table(paste(input_dir,"/",input_prefix,"_STAT_",input_inference_copy_number,"_SCORE_",
                                               input_score,"_ASSESSMENT_",input_permutation,input_suffix, sep=""),
-                                        sep = "\t", header=TRUE, stringsAsFactors=FALSE)
-  
+                                        sep = "\t", header=TRUE, stringsAsFactors=FALSE, quote="")
+
       inferred_copy_number = inferred_copy_number[inferred_copy_number$Taxa %in% df$Taxa, c("Taxa", functions)]
     }
   }
@@ -580,7 +580,7 @@ MultiFunctionTaxaContributionPlots <- function(input_dir=NULL,
     if (length(unique(meta$V2)) < length(meta$V2)) {
       meta$V2 = paste0(row.names(meta),": ",meta$V2)
     }
-    
+
     if (split_function_names_2_lines) {
       location_to_split = ceiling((sapply(gregexpr("\\W+", meta$V2), length)) / 2)
       for (i in 1:length(location_to_split)) {
@@ -590,8 +590,8 @@ MultiFunctionTaxaContributionPlots <- function(input_dir=NULL,
         }
       }
     }
-    
-    
+
+
     #print(head(meta))
     old_functions = functions
     functions = meta[functions,]
@@ -622,7 +622,7 @@ MultiFunctionTaxaContributionPlots <- function(input_dir=NULL,
       return(NULL)
     }
     real_function_abun = read.table(input_function_abundance, sep = "\t", header=TRUE,
-                                    stringsAsFactors=FALSE)
+                                    stringsAsFactors=FALSE, quote="")
 
     names(real_function_abun) = c("KO", names(real_function_abun)[2:length(names(real_function_abun))])
   }
@@ -645,7 +645,7 @@ MultiFunctionTaxaContributionPlots <- function(input_dir=NULL,
                                                 input_predicted_function,"_SCORE_",
                                                 input_score,"_ASSESSMENT_",
                                                 input_permutation,input_suffix), sep = "\t", header=TRUE,
-                                         stringsAsFactors=FALSE)
+                                         stringsAsFactors=FALSE, quote="")
 
     names(predicted_function_abun) = c("KO", names(predicted_function_abun)[2:length(names(predicted_function_abun))])
   }
@@ -670,7 +670,7 @@ MultiFunctionTaxaContributionPlots <- function(input_dir=NULL,
                                                input_predicted_residual,"_SCORE_",
                                                input_score,"_ASSESSMENT_",
                                                input_permutation,input_suffix), sep = "\t", header=TRUE,
-                                        stringsAsFactors=FALSE)
+                                        stringsAsFactors=FALSE, quote="")
 
     names(residual_function_abun) = c("KO", names(residual_function_abun)[2:length(names(residual_function_abun))])
   }
